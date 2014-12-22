@@ -1,0 +1,6 @@
+-classpath 'D:\\MyInfo\\java\\MyGradle\\build\\classes\\main;D:\\MyInfo\\java\\MyGradle\\build\\resources\\main'
+-d 'D:\\MyInfo\\java\\MyGradle\\build\\docs\\javadoc'
+-doctitle 'MyGradle 1.0 API'
+-quiet 
+-windowtitle 'MyGradle 1.0 API'
+'D:\\MyInfo\\java\\MyGradle\\src\\main\\java\\com\\swing\\MenuDemo.java'
