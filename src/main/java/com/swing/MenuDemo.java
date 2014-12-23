@@ -7,17 +7,16 @@ package com.swing;
 
 import com.disp.Disp;
 import com.disp.disp.control.DispControl;
-//import org.apache.poi.ss.usermodel.Workbook;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-//import java.io.FileOutputStream;
+import java.io.FileOutputStream;
 import java.util.Date;
-
 
 public class MenuDemo {
    static JTextArea output;
@@ -145,8 +144,6 @@ public class MenuDemo {
         loadItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    output.append("Load module! " + newline);
-
 
                    final String path_load=getPathToFile("Загрузить");
                     if(path_load==null) return;
@@ -174,8 +171,7 @@ public class MenuDemo {
         saveItemNew.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                output.append("Save module 1! " + newline);
-                /*
+
                final String path_save = getPathToFile("Cоздать")+".xlsx";
                 try {
                     File file = new File(path_save);
@@ -197,7 +193,6 @@ public class MenuDemo {
                             output.append("Не удалось загрузить configs.xlsx"+newline);
                         }
                         try {
-
                             disp.save_report(disp.getReport(),path_save,disp.getConfigs());
 
                         } catch (Exception e1) {
@@ -207,20 +202,17 @@ public class MenuDemo {
 
                         output.append("Файл сохранен! " + newline);
                     }
-
                 };
                 thread.start();
-                */
+
             }
         });
         saveItemPath.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                output.append("Save module 2! " + newline);
-                /*
+
                 final String path_save = getPathToFile("Сохранить");
                 if (path_save == null) return;
-
 
                 Thread thread = new Thread() {
                     public void run() {
@@ -241,10 +233,8 @@ public class MenuDemo {
                         }
                         output.append("Файл сохранен! " + newline);
                     }
-
                 };
                 thread.start();
-                */
             }
         });
 

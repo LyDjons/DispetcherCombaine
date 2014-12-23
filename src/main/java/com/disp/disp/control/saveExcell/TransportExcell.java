@@ -110,9 +110,9 @@ if(configs==null) return "нет в config";
         }
         return "-";
     }
-    public TransportExcell(Report report,ArrayList<Config>configs) {
+    public TransportExcell(Report report,ArrayList<Config>configs,Map<String,String> departMap) {
         tracker = report.getTracker();
-        department= get_list_departments_of_work(report,configs);
+        department= get_list_departments_of_work(report,configs,departMap);
         transport_mark = get_transport_mark(report.getTracker(),report.getTransport(),configs);
         gos =getGos(report.getTracker(), configs);
         type_of_work = get_type_of_work(report.getTracker(),configs);
@@ -175,9 +175,9 @@ if(configs==null) return "нет в config";
     }
     //получение Названия отделения, где находился транспорт
 
-    private static String get_list_departments_of_work(Report report,ArrayList<Config>configs){
+    private static String get_list_departments_of_work(Report report,ArrayList<Config>configs,Map<String,String> departMap){
         String place ="";
-        if(configs==null) return "-";
+        if(configs==null){ return "-";}
         for(Config c : configs){
             if (Integer.parseInt(c.getTracker())==report.getTracker()){
                 if(c.getType_work().contains("збирання")) {
@@ -194,7 +194,7 @@ if(configs==null) return "нет в config";
 
         Set<String> places = new HashSet<String>();
 
-        for(TransportAction ta: report.getTransportActions()){
+      /*  for(TransportAction ta: report.getTransportActions()){
             if(ta.getPlace().contains("Шб") ||ta.getPlace().contains("Пл") ) places.add("Шибиринівка,");
             if(ta.getPlace().contains("Ру") ||ta.getPlace().contains("Нб") ) places.add("Рудка,");
             if(ta.getPlace().contains("Ха") ||ta.getPlace().contains("Ря") ) places.add("Халявин,");
@@ -203,12 +203,31 @@ if(configs==null) return "нет в config";
             if(ta.getPlace().contains("ВЗ") ||ta.getPlace().contains("МО") ||
                     ta.getPlace().contains("Пе")) places.add("Воробїв,");
 
+        }*/
+        for(TransportAction ta: report.getTransportActions()){
+                for(Map.Entry<String,String> m: departMap.entrySet()){
+                    if(ta.getPlace().contains(m.getKey())){
+
+                        try {
+                            int i = Integer.parseInt(ta.getPlace().substring(0,1));
+                        }catch (Exception e){
+                            continue;
+                        }
+
+                        places.add(m.getValue());
+                        System.out.println(ta.getPlace() + "  key= " + m.getKey() + "   value= " + m.getValue());
+                    }
+                }
         }
+
+
         for(String s : places){
             place = place+" "+s;
         }
+//place =place.substring(0,place.length()-1);
 
-        return place.substring(0,place.length()-1);
+
+        return place;
     }
     public ArrayList<Pinter> getPainterListIntervalNumColumn(ArrayList<TransportAction> action){
         ArrayList<Pinter> painterarray = new ArrayList<Pinter>();

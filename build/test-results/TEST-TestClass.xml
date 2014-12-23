@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="TestClass" tests="1" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="disp-chimc" time="1.419334356242E9">
+  <properties/>
+  <testcase name="test_func" classname="TestClass" time="3.495"/>
+  <system-out><![CDATA[Config{tracker=402, mark='John Deere S6901', gos='09039', name='Півень', phone='0976381542', type_work='збирання кукурудзи', agregat='', num_agreg=''}
+Config{tracker=410, mark='John Deere S9880', gos='11270', name='Коробко', phone='0973805840', type_work='збирання кукурудзи', agregat='', num_agreg=''}
+Config{tracker=463, mark='John Deere S9880', gos='11271', name='Кордик', phone='', type_work='збирання кукурудзи', agregat='', num_agreg=''}
+Config{tracker=464, mark='John Deere S9880', gos='11273', name='Василенко', phone='0979658996', type_work='збирання кукурудзи', agregat='', num_agreg=''}
+Config{tracker=468, mark='John Deere S9880', gos='11269', name='Скляров О', phone='', type_work='збирання кукурудзи', agregat='', num_agreg=''}
+Config{tracker=502, mark='John Deere', gos='17637.0', name='Колбаса/Коваленко', phone='', type_work='бункер', agregat='БНП-30', num_agreg='201357'}
+Config{tracker=505, mark=' Case210 ', gos='15122.0', name='Мурашко', phone='', type_work='бункер', agregat='БНП-30', num_agreg='2012309'}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

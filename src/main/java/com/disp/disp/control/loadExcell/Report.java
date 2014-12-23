@@ -21,7 +21,7 @@ public class Report {
 
 
     //статический блок загрузки конфигурационных файлов
-    private static ArrayList<Transport> mtsTransportXML;
+   /* private static ArrayList<Transport> mtsTransportXML;
     static {
         try {
            mtsTransportXML = XmlConverter.unmarshalling("config/config.xml");
@@ -30,6 +30,7 @@ public class Report {
 
         }
     }
+    */
    private ArrayList<TransportAction> transportActions = new ArrayList<TransportAction>();
 
     public Report(int tracker, String transport,Double distance,Date time_work,Date time_stop) {

@@ -10,11 +10,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.sql.Array;
+import java.util.*;
 
 /**
  * Created by disp.chimc on 28.10.14.
@@ -22,6 +21,7 @@ import java.util.Date;
 public class DispControl implements Disp {
     private ArrayList<Report> reports;
     private ArrayList<Config> configs;
+    private Map<String,String> departMap;
     @Override
     public ArrayList<Report> load_report(String path) {
         ExcellLoader excellLoader = new ExcellLoader();
@@ -60,10 +60,10 @@ public class DispControl implements Disp {
         System.out.println(list_name);
         ArrayList<TransportExcell> transportExcell = new ArrayList<TransportExcell>();
         for(Report re: reports){
-            transportExcell.add(new TransportExcell(re,configs));
+            transportExcell.add(new TransportExcell(re,configs,departMap));
         }
-        //сортируем список по отделениям
-        for(int i = 0;i<transportExcell.size();i++){
+      /*  //сортируем список по отделениям
+       for(int i = 0;i<transportExcell.size();i++){
             transportExcell.get(i).setDepartment(transportExcell.get(i).getDepartment()+" ");
         }
         Collections.sort(transportExcell, new Comparator<TransportExcell>() {
@@ -75,7 +75,7 @@ public class DispControl implements Disp {
                 return s2.toString().compareTo(s1.toString());
             }
         });
-
+*/
         try{
             SaveExclell saveExclell = new SaveExclell(path,list_name);
             saveExclell.createHatList();
@@ -117,6 +117,28 @@ public class DispControl implements Disp {
         }
         configs =configList;
         return configList;
+    }
+
+    @Override
+    public void load_departmetn(String path) throws IOException {
+        FileInputStream inputStream = new FileInputStream(path);
+      departMap = new HashMap<String, String>();
+
+        XSSFWorkbook workbook  = new XSSFWorkbook(inputStream);
+
+        XSSFSheet sheet = workbook.getSheet("department");
+        int row_total = sheet.getLastRowNum();
+
+        for(int i = 1 ; i < row_total;i ++){
+
+           departMap.put(sheet.getRow(i).getCell(1).toString(), sheet.getRow(i).getCell(0).toString());
+        }
+
+    }
+
+    @Override
+    public Map<String, String> getDepartMap() {
+        return departMap;
     }
 
     @Override

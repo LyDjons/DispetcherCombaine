@@ -140,7 +140,7 @@ public class SaveExclell {
 
                 for(Pinter p:tr.getPintersList()){
                     if(p.getColor().equals(new Color(0,176,240))){
-                       System.out.println(p.toString());
+
                         for(int i =p.getStart();i<p.getEnd();i++){
                             driwing_cell(row1,i,p.getColor());
                         }
