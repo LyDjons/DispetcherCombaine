@@ -88,7 +88,7 @@ public class DispControl implements Disp {
     }
 
     @Override
-    public ArrayList<Config> load_config(String path) throws IOException {
+    public  ArrayList<Config> load_config(String path) throws IOException {
         ArrayList<Config> configList = new ArrayList<Config>();
         FileInputStream inputStream = new FileInputStream(path);
 
@@ -96,26 +96,57 @@ public class DispControl implements Disp {
         XSSFSheet sheet = workbook.getSheet("combaine");
         int row_total = sheet.getLastRowNum();
 
-        for(int i = 1; i < row_total; i++){
-            String tracker = sheet.getRow(i).getCell(0).toString();
-
-            String num = sheet.getRow(i).getCell(7).toString();
+        for(int i = 1; i < row_total+1; i++){
+            String tracker;
+            String agregat;
+            String mark;
+            String gos;
+            String name;
+            String phone;
+            String vid_rabot;
+            String inv_agregat;
             try{
-                tracker=tracker.substring(0,tracker.indexOf("."));
-                 num =num.substring(0,num.indexOf("."));
+                tracker = sheet.getRow(i).getCell(0).toString();
+                tracker = tracker.substring(0,tracker.indexOf("."));
+            }catch(Exception e){tracker ="0";}
+            try{
+                mark = sheet.getRow(i).getCell(1).toString();
+            }catch(Exception e){mark = "-";}
+            try{
+                gos = sheet.getRow(i).getCell(2).toString();
+            }catch (Exception e){gos = "-";}
+            try{
+                gos = gos.substring(0,gos.indexOf("."));
             }catch (Exception e){}
-            configList.add(new Config(
-                 tracker,
-                    sheet.getRow(i).getCell(1).toString(),
-                    sheet.getRow(i).getCell(2).toString(),
-                    sheet.getRow(i).getCell(3).toString(),
-                    sheet.getRow(i).getCell(4).toString(),
-                    sheet.getRow(i).getCell(5).toString(),
-                    sheet.getRow(i).getCell(6).toString(),
-                    num
-            ));
+
+            try {
+                name = sheet.getRow(i).getCell(3).toString();
+            }catch(Exception e){name = "-";}
+            try {
+                phone = sheet.getRow(i).getCell(4).toString();
+            }catch (Exception e){phone = "-";}
+            try{
+                vid_rabot = sheet.getRow(i).getCell(5).toString();
+            }catch(Exception e){vid_rabot = "-";}
+            try{
+                agregat = sheet.getRow(i).getCell(6).toString();
+            }catch(Exception e){ agregat = "-";}
+
+            try{
+                inv_agregat = sheet.getRow(i).getCell(7).toString();
+            }catch (Exception e){inv_agregat = "-";}
+            try{
+                inv_agregat = inv_agregat.substring(0,inv_agregat.indexOf("."));
+            }catch (Exception e){}
+
+            try{
+                configList.add(new Config(tracker,mark,gos,name,phone,vid_rabot,agregat,inv_agregat));
+            }catch (Exception e){
+                System.out.print("Can not add element to configList");
+            }
+
         }
-        configs =configList;
+        configs = configList;
         return configList;
     }
 
@@ -129,7 +160,7 @@ public class DispControl implements Disp {
         XSSFSheet sheet = workbook.getSheet("department");
         int row_total = sheet.getLastRowNum();
 
-        for(int i = 1 ; i < row_total;i ++){
+        for(int i = 1 ; i < row_total+1;i ++){
 
            departMap.put(sheet.getRow(i).getCell(1).toString(), sheet.getRow(i).getCell(0).toString());
         }

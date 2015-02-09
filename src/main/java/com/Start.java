@@ -14,9 +14,10 @@ public class Start {
         public static void main(String []args) throws IOException {
             Disp disp = new DispControl();
             disp.load_config("config/config.xlsx");
-            disp.loadReport("Document.xlsx");
-            disp.load_departmetn("config/config.xlsx");
-disp.save_report(disp.getReport(),"file.xlsx",disp.getConfigs());
+          //  disp.loadReport("Document.xlsx");
+           //disp.load_departmetn("config/config.xlsx");
+
+//disp.save_report(disp.getReport(),"file.xlsx",disp.getConfigs());
 
        //   disp.save_report(disp.getReport(),"test.xlsx",disp.getConfigs());
 

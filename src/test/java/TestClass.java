@@ -13,11 +13,5 @@ public class TestClass {
     @Test
     public void test_func () throws IOException {
 
-    Disp disp = new DispControl();
-        disp.load_config("config/config.xlsx");
-        disp.loadReport("Document.xlsx");
-
-
-
     }
 }

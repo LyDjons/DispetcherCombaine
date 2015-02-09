@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Date;
 
@@ -212,6 +213,7 @@ public class MenuDemo {
             public void actionPerformed(ActionEvent e) {
 
                 final String path_save = getPathToFile("Сохранить");
+
                 if (path_save == null) return;
 
                 Thread thread = new Thread() {
@@ -219,8 +221,11 @@ public class MenuDemo {
                         output.append(new Date() + " :  Терпение, пытаюсь сохранить..." + newline);
                         try{
                             disp.load_config("config/config.xlsx");
-                        }catch (Exception e){
-
+                        }
+                        catch (FileNotFoundException e){
+                            output.append("Не удалось нати файл configs.xlsx");
+                        }
+                        catch (Exception e){
                             output.append("Не удалось загрузить configs.xlsx");
                         }
                         try {

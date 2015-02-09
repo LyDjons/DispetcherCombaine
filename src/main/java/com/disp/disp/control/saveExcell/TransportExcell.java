@@ -112,7 +112,7 @@ if(configs==null) return "нет в config";
     }
     public TransportExcell(Report report,ArrayList<Config>configs,Map<String,String> departMap) {
         tracker = report.getTracker();
-        department= get_list_departments_of_work(report,configs,departMap);
+       // department= get_list_departments_of_work(report,configs,departMap);
         transport_mark = get_transport_mark(report.getTracker(),report.getTransport(),configs);
         gos =getGos(report.getTracker(), configs);
         type_of_work = get_type_of_work(report.getTracker(),configs);
@@ -228,6 +228,7 @@ if(configs==null) return "нет в config";
 
 
         return place;
+
     }
     public ArrayList<Pinter> getPainterListIntervalNumColumn(ArrayList<TransportAction> action){
         ArrayList<Pinter> painterarray = new ArrayList<Pinter>();
