@@ -5,8 +5,10 @@ package com.swing;
  */
 
 
+import com.config.Config;
 import com.disp.Disp;
 import com.disp.disp.control.DispControl;
+import com.disp.disp.control.loadExcell.Report;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.Map;
 
 public class MenuDemo {
    static JTextArea output;
@@ -155,13 +158,32 @@ public class MenuDemo {
 
                       try {
                           disp.loadReport(path_load);
-
+                          for(Report re: disp.getReport())
+                              output.append("  "+re.getTracker()+"  "+ re.getTransport());
                       } catch (Exception e) {
                            output.append("Не удаллсь загрузить файл  "+path_load+newline);
                           return;
                       }
 
-                      output.append("Файл успешно загружен!"+newline);
+                      output.append("ДУТ успешно загружен!"+newline);
+                      output.append("Загрузка файла конфигурации..."+newline);
+                      try{
+                          disp.load_config("config/config.xlsx");
+                         for(Config c: disp.getConfigs())
+                             output.append("  "+c.toString()+"\n");
+                      }catch (Exception e){
+                          output.append("Не удалось загрузить configs.xlsx"+newline);
+                      }
+                      output.append("Файл конфигурации успешно загружен!"+newline);
+                      output.append("Загрузка даных депортаментов з файла конфигурации..."+newline);
+                      try{
+                          disp.load_departmetn("config/config.xlsx");
+                          for(Map.Entry<String,String> m :disp.getDepartMap().entrySet())
+                              output.append("  "+m.toString()+"\n");
+                      }catch (Exception e){
+                          output.append("Не удалось загрузить департаменты configs.xlsx"+newline);
+                      }
+                      output.append("Файл депортаментов успешно загружен!"+newline);
                   }
 
                 };
@@ -189,7 +211,7 @@ public class MenuDemo {
                     public void run() {
                         output.append(new Date() + " :  Терпение, пытаюсь сохранить..." + newline);
                         try{
-                            disp.load_config("config/config.xlsx");
+                           // disp.load_config("config/config.xlsx");
                         }catch (Exception e){
                             output.append("Не удалось загрузить configs.xlsx"+newline);
                         }
