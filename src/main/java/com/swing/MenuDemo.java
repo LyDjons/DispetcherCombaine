@@ -140,7 +140,7 @@ public class MenuDemo {
 
 
                 } catch (Exception e3) {
-                   output.append("Не найден путь. Ищи вручную"+newline);
+                   output.append(new Date() +" -> Не найден путь. Ищи вручную"+newline);
                 }
             }
 
@@ -154,36 +154,36 @@ public class MenuDemo {
 
                     Thread thread = new Thread(){
                   public void  run(){
-                      output.append(new Date() + " :  Операция  Загрузки ДУТ..." + newline);
+                      output.append(new Date() + " -> Операция  Загрузки ДУТ..." + newline);
 
                       try {
                           disp.loadReport(path_load);
-                          for(Report re: disp.getReport())
-                              output.append("  "+re.getTracker()+"  "+ re.getTransport());
+                          //for(Report re: disp.getReport())
+                            //  output.append("  "+re.getTracker()+"  "+ re.getTransport());
                       } catch (Exception e) {
-                           output.append("Не удаллсь загрузить файл  "+path_load+newline);
+                           output.append(new Date() +" -> Не удаллсь загрузить файл  "+path_load+newline);
                           return;
                       }
 
-                      output.append("ДУТ успешно загружен!"+newline);
-                      output.append("Загрузка файла конфигурации..."+newline);
+                      output.append(new Date() +" -> ДУТ успешно загружен!"+newline);
+                      output.append(new Date() +" -> Загрузка файла конфигурации..."+newline);
                       try{
                           disp.load_config("config/config.xlsx");
-                         for(Config c: disp.getConfigs())
-                             output.append("  "+c.toString()+"\n");
+                        // for(Config c: disp.getConfigs())
+                          //   output.append("  "+c.toString()+"\n");
                       }catch (Exception e){
                           output.append("Не удалось загрузить configs.xlsx"+newline);
                       }
-                      output.append("Файл конфигурации успешно загружен!"+newline);
-                      output.append("Загрузка даных депортаментов з файла конфигурации..."+newline);
+                      output.append(new Date() +" -> Файл конфигурации успешно загружен!"+newline);
+                      output.append(new Date() +" -> Загрузка даных депортаментов з файла конфигурации..."+newline);
                       try{
                           disp.load_departmetn("config/config.xlsx");
-                          for(Map.Entry<String,String> m :disp.getDepartMap().entrySet())
-                              output.append("  "+m.toString()+"\n");
+                        //  for(Map.Entry<String,String> m :disp.getDepartMap().entrySet())
+                           //   output.append("  "+m.toString()+"\n");
                       }catch (Exception e){
-                          output.append("Не удалось загрузить департаменты configs.xlsx"+newline);
+                          output.append(new Date() +" -> Не удалось загрузить департаменты configs.xlsx"+newline);
                       }
-                      output.append("Файл депортаментов успешно загружен!"+newline);
+                      output.append(new Date() +" -> Файл депортаментов успешно загружен!"+newline);
                   }
 
                 };
@@ -204,26 +204,22 @@ public class MenuDemo {
                         workbook.createSheet("Лист1");
                         workbook.write(fis);
                 } catch (Exception e1) {
-                    output.append("Не удалось создать файл");
+                    output.append(new Date() + " -> Не удалось создать файл");
                 }
                 if (path_save == null) return;
                 Thread thread = new Thread() {
                     public void run() {
-                        output.append(new Date() + " :  Терпение, пытаюсь сохранить..." + newline);
-                        try{
-                           // disp.load_config("config/config.xlsx");
-                        }catch (Exception e){
-                            output.append("Не удалось загрузить configs.xlsx"+newline);
-                        }
+                        output.append(new Date() + " -> Терпение, пытаюсь сохранить..." + newline);
+
                         try {
                             disp.save_report(disp.getReport(),path_save,disp.getConfigs());
 
                         } catch (Exception e1) {
-                           output.append("Не удалось сохранить. Что то не так!"+newline);
+                           output.append(new Date() + " -> Не удалось сохранить. Что то не так!"+newline);
                             return;
                         }
 
-                        output.append("Файл сохранен! " + newline);
+                        output.append(new Date() + " -> Файл сохранен! " + newline);
                     }
                 };
                 thread.start();
@@ -240,25 +236,25 @@ public class MenuDemo {
 
                 Thread thread = new Thread() {
                     public void run() {
-                        output.append(new Date() + " :  Терпение, пытаюсь сохранить..." + newline);
+                        output.append(new Date() + " -> Терпение, пытаюсь сохранить..." + newline);
                         try{
                             disp.load_config("config/config.xlsx");
                         }
                         catch (FileNotFoundException e){
-                            output.append("Не удалось нати файл configs.xlsx");
+                            output.append(new Date() + " -> Не удалось нати файл configs.xlsx");
                         }
                         catch (Exception e){
-                            output.append("Не удалось загрузить configs.xlsx");
+                            output.append(new Date() + " -> Не удалось загрузить configs.xlsx");
                         }
                         try {
 
                           disp.save_report(disp.getReport(),path_save,disp.getConfigs());
 
                         } catch (Exception e1) {
-                           output.append("Не удалось сохранить. Что то не так!"+newline);
+                           output.append(new Date() + " -> Не удалось сохранить. Что то не так!"+newline);
                             return;
                         }
-                        output.append("Файл сохранен! " + newline);
+                        output.append(new Date() + " -> Файл сохранен! " + newline);
                     }
                 };
                 thread.start();
@@ -311,7 +307,7 @@ public class MenuDemo {
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Ленивый диспетчер   ");
+        JFrame frame = new JFrame("Ленивый диспетчер  v 0.1 ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.

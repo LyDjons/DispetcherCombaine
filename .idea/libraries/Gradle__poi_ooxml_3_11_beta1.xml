@@ -6,7 +6,6 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/3.11-beta1/f326ca57ef4ed155995a925b1157c0b08cb28865/poi-ooxml-3.11-beta1-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/3.11-beta1/f326ca57ef4ed155995a925b1157c0b08cb28865/poi-ooxml-3.11-beta1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

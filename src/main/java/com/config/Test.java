@@ -41,8 +41,8 @@ for(Config c : config){
             transportExcell.add(new TransportExcell(re,disp.getConfigs(),disp.getDepartMap())); 
         }
 
-       // for(Map.Entry<String,String> m :disp.getDepartMap().entrySet())
-         //    System.out.println(m);
+        for(Map.Entry<String,String> m :disp.getDepartMap().entrySet())
+             System.out.println(m);
 
 
 

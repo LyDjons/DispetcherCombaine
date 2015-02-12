@@ -21,8 +21,6 @@ public class TransportExcell {
     private Date end;
     private ArrayList<Pinter> pintersList;
 
-
-
     public String getDepartment() {
         return department;
     }
@@ -112,7 +110,7 @@ if(configs==null) return "нет в config";
     }
     public TransportExcell(Report report,ArrayList<Config>configs,Map<String,String> departMap) {
         tracker = report.getTracker();
-       // department= get_list_departments_of_work(report,configs,departMap);
+        department= get_list_departments_of_work(report,configs,departMap);
         transport_mark = get_transport_mark(report.getTracker(),report.getTransport(),configs);
         gos =getGos(report.getTracker(), configs);
         type_of_work = get_type_of_work(report.getTracker(),configs);
@@ -152,7 +150,6 @@ if(configs==null) return "нет в config";
         return null;
     }
          //олучение окончания движения
-
     private static Date getEndWork(Report report){
         ArrayList<TransportAction> ta = report.getTransportActions();
         for(int j=ta.size()-1;j>-1;j--){
@@ -173,8 +170,8 @@ if(configs==null) return "нет в config";
         }
         return "-";
     }
-    //получение Названия отделения, где находился транспорт
 
+    //получение Названия отделения, где находился транспорт
     private static String get_list_departments_of_work(Report report,ArrayList<Config>configs,Map<String,String> departMap){
         String place ="";
         if(configs==null){ return "-";}
@@ -186,24 +183,11 @@ if(configs==null) return "нет в config";
                 if(c.getType_work().contains("бункер")) {
                     place+="Бункера  ";
                 }
-
-
             }
-
         }
 
         Set<String> places = new HashSet<String>();
 
-      /*  for(TransportAction ta: report.getTransportActions()){
-            if(ta.getPlace().contains("Шб") ||ta.getPlace().contains("Пл") ) places.add("Шибиринівка,");
-            if(ta.getPlace().contains("Ру") ||ta.getPlace().contains("Нб") ) places.add("Рудка,");
-            if(ta.getPlace().contains("Ха") ||ta.getPlace().contains("Ря") ) places.add("Халявин,");
-            if(ta.getPlace().contains("Ро") ||ta.getPlace().contains("ВВ") ||ta.getPlace().contains("C")
-                    ||ta.getPlace().contains("Хм") ) places.add("Роїще,");
-            if(ta.getPlace().contains("ВЗ") ||ta.getPlace().contains("МО") ||
-                    ta.getPlace().contains("Пе")) places.add("Воробїв,");
-
-        }*/
         for(TransportAction ta: report.getTransportActions()){
                 for(Map.Entry<String,String> m: departMap.entrySet()){
                     if(ta.getPlace().contains(m.getKey())){
@@ -215,17 +199,15 @@ if(configs==null) return "нет в config";
                         }
 
                         places.add(m.getValue());
-                        System.out.println(ta.getPlace() + "  key= " + m.getKey() + "   value= " + m.getValue());
                     }
                 }
         }
 
-
         for(String s : places){
-            place = place+" "+s;
+            place = place+" "+s+",";
         }
-//place =place.substring(0,place.length()-1);
-
+        if(place.endsWith(","))
+            place =place.substring(0,place.length()-1);
 
         return place;
 
@@ -238,7 +220,6 @@ if(configs==null) return "нет в config";
             if(transportAction.getStart().getHours()<7) continue;
 if(transportAction.getStatus().contains("Стоянка") && transportAction.getInterval().getMinutes()<15 &&
 transportAction.getInterval().getHours()<0) continue;
-
 
             int start =get_num_cell(transportAction.getStart());
             int end = get_num_cell(transportAction.getEnd());
@@ -253,8 +234,8 @@ transportAction.getInterval().getHours()<0) continue;
             if(transportAction.getStatus().contains("Движение") && transportAction.getMiddle_speed()<14){
                 painterarray.add(new Pinter(start,end,new Color(0,176,80)));
             }
-
         }
+
         //deleted start yellow
         for(Pinter p : painterarray){
             if(p.getColor().equals(new Color(255,255,0)))
@@ -327,9 +308,7 @@ transportAction.getInterval().getHours()<0) continue;
         countdata.setSeconds(0);
         int cell=5;
         for(int i =0;i<101;i++){
-            //    System.out.println("data = " + date + "     count  " + countdata + "   cell=" + cell);
             if(date.getHours()==countdata.getHours()&& date.getMinutes()==countdata.getMinutes()) {
-                // System.out.println("result=" + cell);
                 return cell;
             } countdata.setMinutes(countdata.getMinutes()+15);
             cell++;
@@ -353,7 +332,5 @@ transportAction.getInterval().getHours()<0) continue;
                 ", end=" + end +
                 '}';
     }
-
-
 
 }
